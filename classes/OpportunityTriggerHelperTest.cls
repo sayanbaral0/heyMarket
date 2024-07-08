@@ -47,18 +47,18 @@ private class OpportunityTriggerHelperTest {
         Date today = Date.today();
         Opportunity opp1 = new Opportunity(
             Name = 'Test Opportunity 1',
-            CloseDate = today.addDays(20), // Close date within 30 days hence should update to 'Closing'
-            StageName = 'Prospecting'
-        );
+            CloseDate = today, // Close date within 30 days hence should update to 'Closing'
+            StageName = 'Prospecting');
         Opportunity opp2 = new Opportunity(
             Name = 'Test Opportunity 2',
-            CloseDate = today.addDays(40), // Close date more than 30 days, should remain 'Prospecting'
+            CloseDate = today.addDays(-40), // Close date more than 30 days, should remain 'Prospecting'
             StageName = 'Prospecting'
         );
-        
+        OpportunityTriggerHelper.hasTriggerRan=true;
         insert new List<Opportunity>{ opp1, opp2 };
         Test.startTest();
-        
+        UpdateOpportunityStageBatch obj=new UpdateOpportunityStageBatch();
+        Database.executeBatch(obj,5);
         Test.stopTest();
         
      }
