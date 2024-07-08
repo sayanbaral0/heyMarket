@@ -4,9 +4,10 @@ public class OpportunityTriggerHelper {
     {
         Opportunity oppToUpdate=new Opportunity();
         List<Opportunity> oppsToUpdate=new List<Opportunity>();
+        
         if(!hasTriggerRan)
         {
-            hasTriggerRan=true;
+            hasTriggerRan= true;
             for(Id key: newOpp.keySet())
             {
                 oppToUpdate=new Opportunity();
